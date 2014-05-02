@@ -1,0 +1,24 @@
+= render "header", :back_url=>"/oauths/#{@oauth.id}/entries", :back_label=>"Tweets"
+
+p#notice = notice
+
+p
+  strong Oauth:
+  = @entry.oauth_id
+p
+  strong Description:
+  = @entry.description
+p
+  strong Url:
+  = @entry.url
+p
+  strong Publish:
+  = @entry.publish
+
+/= link_to 'Edit', edit_entry_path(@entry)
+= link_to 'Edit', "/oauths/#{@oauth.id}/entries/#{@entry.id}"
+'|
+= link_to 'Back', "/oauths/#{@oauth.id}/entries"
+
+
+= render "footer"

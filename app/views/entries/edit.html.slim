@@ -1,0 +1,9 @@
+= render "header", :back_url=>"/", :back_label=>"Accounts"
+
+= render "header_title", :title=>"Edit Tweet"
+
+= render "entry_menu", :current=>"Tweets"
+
+== render 'form', :form_path=>"/oauths/#{@oauth.id}/entries/#{@entry.id}"
+
+= render "footer"

@@ -1,0 +1,35 @@
+= render "header", :back_url=>"", :back_label=>""
+
+.accounts
+  - @oauths.each do |oauth|
+    .account
+      -if oauth.publish
+        - s = 'fly'
+      -else
+        - s = ''
+      .drone class="#{s}"
+        .position
+          .inner
+            .shadow
+            .body_all
+              .wing.wing0
+              .wing.wing1
+              .wing.wing2
+              .wing.wing3
+              .body
+              .icon
+                = image_tag oauth.image, :size=>"64x64"
+      .title
+        a href="http://twitter.com/#{oauth.name}" target="_blank" #{oauth.name}
+        -if oauth.publish
+          = " is flying."
+        -else
+          = " is landing."
+      .btns
+        = link_to "#{oauth.entry_count} Tweets", "/oauths/#{oauth.id}/entries", :class=>"btn"
+        = link_to 'Settings', edit_oauth_path(oauth), :class=>"btn"
+      /.frequency
+        /= "#{format_time(oauth.base_hour,oauth.base_min)} / #{oauth.frequency}"
+
+.add_account
+  = link_to 'Add Account', "/auth/twitter", :class=>"btn"

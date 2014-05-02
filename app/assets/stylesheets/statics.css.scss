@@ -1,0 +1,723 @@
+// Place all the styles related to the statics controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@charset "UTF-8";
+
+body {
+  @include sans-selif;
+  color: #000000;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  background: $bg_color;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
+  -webkit-font-feature-settings: "kern";
+  -moz-font-feature-settings: "kern";
+  -moz-font-feature-settings: "kern=1";
+}
+button, ul, li {
+  margin: 0;
+  padding: 0;
+}
+button {
+  @include sans-selif-bold;
+  border: none;
+  cursor: pointer;
+  &.btn-icon {
+    background: transparent;
+    text-align: center;
+  }
+}
+.btn {
+  @include btn;
+  background: $yellow;
+  color: $white;
+  padding: 12px 0;
+  @include border-radius(4px);
+}
+a {
+  color: $yellow;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+input, textarea {
+  outline: 0;
+  color: $yellow;
+  background: transparent;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  padding: 2px 0;
+  border: none;
+  /* border-bottom: 2px solid #FF3051; */
+}
+input[type="checkbox"] {
+  width: auto;
+}
+input::-webkit-input-placeholder {
+  color: #CCCCCC;
+}
+input:-moz-placeholder {
+  color: #CCCCCC;
+}
+textarea::-webkit-input-placeholder {
+  color: #CCCCCC;
+}
+textarea:-moz-placeholder {
+  color: #CCCCCC;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  width: 640px;
+  margin: 0 auto;
+  @include mediaquery-smartphone {
+    width: 280px;
+  }
+}
+.container_narrow {
+  width: 560px;
+  margin: 0 auto;
+  @include mediaquery-smartphone {
+    width: 280px;
+  }
+}
+.inner {
+  position: relative;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+
+
+@include keyframes(fly_shadow) {
+  0% {
+    @include transform(translate(20px, 40px));
+    opacity: 0.05;
+  }
+  50% {
+    @include transform(translate(40px, 60px));
+    opacity: 0.02;
+  }
+  100% {
+    @include transform(translate(20px, 40px));
+    opacity: 0.05;
+  }
+}
+@include keyframes(fly_body) {
+  0% {
+    @include transform(scale(1.0));
+  }
+  50% {
+    @include transform(scale(1.05));
+  }
+  100% {
+    @include transform(scale(1.0));
+  }
+}
+@include keyframes(fly_wing) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+
+.drone {
+  &.fly {
+    .shadow {
+      opacity: 0.05;
+      @include transform(translate(20px, 40px));
+      @include experimental(animation-name, fly_shadow);
+      @include experimental(animation-duration, 3.0s); //実行時間
+      @include experimental(animation-iteration-count, infinite); //実行回数(number | infinite)
+      @include experimental(animation-direction, normal); //反復の有無(normal | alternate)
+      @include experimental(animation-delay, 0s); //実行までの待ち時間
+      @include experimental(animation-fill-mode, both);//実行前や実行後のスタイル指定(none | forwards | backwards | both)
+      @include experimental(animation-timing-function, ease-in-out);//タイミング(ease | liner | ease-in | ease-out | ease-in-out | cubic-bezier)
+    }
+    .body_all {
+      @include experimental(animation-name, fly_body);
+      @include experimental(animation-duration, 3.0s); //実行時間
+      @include experimental(animation-iteration-count, infinite); //実行回数(number | infinite)
+      @include experimental(animation-direction, normal); //反復の有無(normal | alternate)
+      @include experimental(animation-delay, 0s); //実行までの待ち時間
+      @include experimental(animation-fill-mode, both);//実行前や実行後のスタイル指定(none | forwards | backwards | both)
+      @include experimental(animation-timing-function, ease-in-out);//タイミング(ease | liner | ease-in | ease-out | ease-in-out | cubic-bezier)
+
+      .wing {
+        @include experimental(animation-name, fly_wing);
+        @include experimental(animation-duration, 0.2s); //実行時間
+        @include experimental(animation-iteration-count, infinite); //実行回数(number | infinite)
+        @include experimental(animation-direction, normal); //反復の有無(normal | alternate)
+        @include experimental(animation-delay, 0s); //実行までの待ち時間
+        @include experimental(animation-fill-mode, both);//実行前や実行後のスタイル指定(none | forwards | backwards | both)
+        @include experimental(animation-timing-function, linear);//タイミング(ease | liner | ease-in | ease-out | ease-in-out | cubic-bezier)
+      }
+    }
+  }
+  position: relative;
+  height: 300px;
+
+  .position {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    .inner {
+      width: 0;
+      height: 0;
+      .shadow {
+        position: absolute;
+        left:-80px;
+        top: -80px;
+        width: 160px;
+        height: 160px;
+        background: asset-url("drone_shadow@2x.png") no-repeat 0 0;
+        background-size: 160px 160px;
+        opacity: 0.15;
+        @include transform(translate(2px, 4px));
+        -webkit-filter: blur(2px);
+      }
+      .body_all {
+        position: absolute;
+        left:-80px;
+        top: -80px;
+        .icon {
+          position: absolute;
+          z-index: 3;
+          left: 48px;
+          top: 49px;
+          width: 64px;
+          height: 64px;
+          @include border-radius(32px);
+          overflow: hidden;
+        }
+        .body {
+          width: 160px;
+          height: 160px;
+          background: asset-url("drone@2x.png") no-repeat 0 0;
+          background-size: 160px 160px;
+          position: relative;
+          z-index: 2;
+        }
+        .wing {
+          width: 42px;
+          height: 5px;
+          background: asset-url("drone_wing@2x.png") no-repeat 0 0;
+          background-size: 42px 5px;
+          position: absolute;
+          z-index: 1;
+          &.wing0 {
+            left: 14px;
+            top: 32px;
+          }
+          &.wing1 {
+            left: 105px;
+            top: 32px;
+          }
+          &.wing2 {
+            left: 14px;
+            top: 122px;
+          }
+          &.wing3 {
+            left: 105px;
+            top: 122px;
+          }
+        }
+      }
+    }
+  }
+  .shadow {
+
+  }
+  .body_all {
+
+
+  }
+}
+
+#global_header {
+
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  background: $yellow;
+  height: 60px;
+  .back {
+    display: inline-block;
+    position:absolute;
+    left: 10px;
+    top: 26px;
+    a {
+      span {
+        @include sans-selif-bold;
+        font-size: 1.4em;
+        font-weight: normal;
+        line-height: 0;
+        margin-left: 4px;
+      }
+    }
+  }
+  .logout {
+    position: absolute;
+    right: 8px;
+    top: 16px;
+    width:100px;
+    height: 50px;
+    text-align: right;
+    i {
+      font-size: 64px;
+      line-height: 0;
+    }
+
+  }
+  a {
+    color: #000000;
+    display: inline-block;
+    h1 {
+      @include sans-selif-bold;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1.4em;
+      padding: 16px 0 0;
+      .icon {
+        display: inline-block;
+        margin-right: 8px;
+        vertical-align: middle;
+        img {
+          @include border-radius(24px);
+        }
+      }
+      span {
+        font-size: 24px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+.header_space {
+  padding-top: 100px;
+  h2 {
+    @include sans-selif-bold;
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 60px;
+    display: none;
+  }
+}
+.header_menu {
+  text-align: center;
+  margin-bottom: 40px;
+  ul {
+    li {
+      display: inline-block;
+      margin-left: 0px;
+      background: $yellow;
+      line-height:24px;
+      @include sans-selif-bold;
+      @include box-shadow(-0px -3px 0px rgba(0,0,0,0.1) inset);
+      &.current {
+        @include box-shadow(-0px 3px 0px rgba(0,0,0,0.1) inset, 0px 100px 0px rgba(0,0,0,0.1) inset);
+      }
+      &:first-child {
+        margin-left: 0px;
+        @include border-radius(4px 0 0 4px);
+      }
+      &:last-child {
+        margin-left: 0px;
+        @include border-radius(0 4px 4px 0);
+      }
+      a {
+        color: #000000;
+        display:inline-block;
+        padding: 10px 14px;
+      }
+      form {
+        padding: 10px 14px;
+        input {
+          padding: 0px 0;
+          color: #000000;
+          width: 120px;
+          line-height: 18px;
+        }
+      }
+
+    }
+  }
+}
+
+#statics.login {
+  background: $yellow;
+  .drone {
+    margin-top: 100px;
+  }
+  .title {
+    margin-bottom: 100px;
+    text-align: center;
+    h1 {
+      font-size: 72px;
+      @include sans-selif-bold;
+    }
+    p {
+      font-size: 24px;
+    }
+  }
+  form {
+    width: 300px;
+    margin: 0 auto;
+    input {
+      color: $white;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+
+.accounts {
+  padding-top: 60px;
+  .account {
+    margin-bottom: 60px;
+    text-align: center;
+    .title {
+      margin-bottom: 20px;
+      font-size: 18px;
+      a {
+        color: #000000;
+        font-weight: bold;
+        text-decoration: underline;
+      }
+    }
+    .btns {
+      margin-bottom: 40px;
+      .btn {
+        width: 120px;
+        margin-left: 20px;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+    .frequency {
+      color: $yellow;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .memori {
+      background: asset-url("memori@2x.png") repeat-x 0 0;
+      background-size: 1440px 31px;
+      height: 31px;
+      .pin {
+        &.ten_min {
+          background: asset-url("point_ten_min@2x.png") repeat-x 0 0;
+          background-size: 1440px 31px;
+        }
+        &.hour {
+          background: asset-url("point_hour@2x.png") repeat-x 0 0;
+          background-size: 1440px 31px;
+        }
+        &.day {
+          background: asset-url("point_day@2x.png") repeat-x 0 0;
+          background-size: 1440px 31px;
+        }
+
+
+        height: 31px;
+      }
+    }
+  }
+}
+.add_account {
+  text-align: center;
+  padding: 150px 0;
+  .btn {
+    padding: 20px 0;
+    width: 300px;
+    font-size: 24px;
+  }
+}
+.no_result {
+  font-weight: bold;
+  font-size: 64px;
+  text-align:center;
+  color: #CCCCCC;
+  padding-top: 40px;
+}
+
+
+.box {
+  @include border-radius(4px);
+  background: #F6F6F6;
+  @include box-shadow(0px 2px 0px rgba(0,0,0,0.1));
+  padding: 20px;
+}
+
+
+.control-group {
+  margin-bottom:15px;
+  &:before {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear:both;
+  }
+  .control-label {
+    float: left;
+    width: 100px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+    border-bottom: 0;
+    font-weight: bold;
+  }
+  .controls {
+    margin-left: 120px;
+    input[type="text"], input[type="password"], textarea {
+      width: 320px;
+      background: #FFFFFF;
+      color: #000000;
+      @include border-radius(4px);
+      padding: 5px;
+      @include sans-selif;
+      font-size: 12px;
+      @include box-shadow(0px 1px 0px rgba(0,0,0,0.1) inset);
+      margin-bottom: 0px;
+    }
+    .btn {
+      width: 140px;
+    }
+    .coops {
+      margin-top: 10px;
+      li {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+.actions {
+  margin-top: 40px;
+  text-align: center;
+
+}
+
+
+.account_header {
+  padding-top: 140px;
+  margin-bottom: 60px;
+  text-align: center;
+  .icon {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+    border: 4px solid yellow;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: 18px;
+    color: #000000;
+    font-weight: bold;
+  }
+}
+
+#entries.index {
+  .new_entry {
+    text-align:center;
+    margin-bottom: 60px;
+    .btn {
+      padding: 20px 0;
+      width: 300px;
+      font-size: 24px;
+    }
+  }
+}
+
+.entries {
+  .entry {
+    margin-bottom: 20px;
+    > .time {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 5px;
+      font-size: 12px;
+      color: #CCCCCC;
+      font-weight: bold;
+    }
+    .box {
+      border-left: 5px solid $yellow;
+      padding: 10px;
+      .icon {
+        width: 48px;
+        display: inline-block;
+        margin-right: 20px;
+        vertical-align: top;
+        img {
+          @include border-radius(4px);
+        }
+      }
+      .descriptions {
+        width: 442px;
+        display: inline-block;
+        vertical-align: top;
+        .description {
+          margin-bottom: 10px;
+          line-height: 1.6em;
+          a {
+            &.url {
+              color: #135e58;
+            }
+            &.tag {
+              color: #999999;
+            }
+          }
+        }
+        .image {
+          width: 100%;
+          height: 180px;
+          margin-bottom: 10px;
+          background-size: cover;
+          @include border-radius(8px);
+        }
+      }
+      footer {
+        display: table;
+        clear: both;
+        position: relative;
+        width: 100%;
+        margin-top: 10px;
+        .posted {
+          display: table-cell;
+          color: #CCCCCC;
+          font-size: 12px;
+          vertical-align: middle;
+          .timer {
+            display: inline-block;
+            background: $yellow;
+            padding: 5px 4px;
+            font-size: 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 6px;
+            &.error {
+              background: $red;
+            }
+            i {
+              vertical-align: middle;
+              margin-right: 3px;
+            }
+            span {
+              vertical-align: middle;
+            }
+          }
+          > span {
+            vertical-align: middle;
+            margin-right: 8px;
+          }
+          a {
+            color: #CCCCCC;
+            vertical-align: middle;
+            text-decoration: underline;
+            &:hover {
+              color: #999999;
+            }
+          }
+        }
+        .btns {
+          font-size: 18px;
+          display: table-cell;
+          text-align:right;
+          a {
+            margin-left: 10px;
+            color: #CCCCCC;
+            &:hover {
+              color: #999999;
+            }
+          }
+        }
+      }
+    }
+    &.not_published {
+      .box {
+        background: #FDFDFD;
+        border-left: 5px solid rgba(0,0,0,0);
+        .icon {
+         img {
+          opacity: 0.3;
+         }
+        }
+      }
+      .descriptions {
+        .description {
+          opacity: 0.3;
+        }
+        a {
+          .image {
+            opacity: 0.3;
+          }
+        }
+      }
+    }
+  }
+  .end {
+    text-align: center;
+    margin-top: 60px;
+    i {
+      font-size: 96px;
+      line-height: 96px;
+      display: inline-block;
+    }
+    h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+}
+
+#global_footer {
+  padding-top: 200px;
+}
+
+.pagination {
+  display: none;
+}
+.next_loader {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  &.show {
+    background: none;
+  }
+  &.hide {
+    height: 0;
+    background: none;
+  }
+}
+
+
+#entries.tags {
+  .tags {
+    ul {
+      li {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

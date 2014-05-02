@@ -1,0 +1,22 @@
+.container
+  .drone.fly
+    .position
+      .inner
+        .shadow
+        .body_all
+          .wing.wing0
+          .wing.wing1
+          .wing.wing2
+          .wing.wing3
+          .body
+  .title
+    h1 Drone
+    p is flying.
+
+.container
+  = form_tag "/login_session", multipart: true, class: "form-inline login" do
+    = text_field_tag :id, '', class:"form-control", placeholder:"ID"
+    = password_field_tag :password, '', class:"form-control", placeholder:"Password"
+    = submit_tag "Login", class:"btn border"
+
+= render "footer"

@@ -1,0 +1,41 @@
+-if entry.publish
+  - s = ''
+-else
+  - s = 'not_published'
+.entry.container_narrow.autoload class="#{s}"
+  - if type=="schedule"
+    - a_week = ["日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"]
+    .time = "#{format_time(schedule_hour,schedule_min)}, #{a_week[schedule_wday]}"
+  .box
+    .icon = image_tag oauth.image, :size=>"48"
+    .descriptions
+      .description = entry.description_all(true).html_safe
+      - if entry.image.present?
+        = link_to entry.image.url, :target=>"_blank"
+          .image style="background: url(#{entry.image.url}); background-position: center center; background-size: cover;"
+      footer
+        .posted
+          - if entry.post_hour && entry.post_min
+            - if oauth.is_turn(entry.post_hour,entry.post_min)
+              - s = ""
+            - else
+              - s = "error"
+            .timer class="#{s}"
+              i.entypo.clock
+              span = "#{format_time(entry.post_hour,entry.post_min)}"
+          span #{entry.posted_count}回
+          - if entry.latest_post.present?
+            = link_to entry.latest_post.posted_url, :target=>"_blank"
+              = "#{time_ago_in_words entry.latest_post.created_at}前"
+              - if entry.latest_post.error == true
+                = "（エラー）"
+              - else
+                = ""
+        .btns
+          = link_to "/oauths/#{oauth.id}/entries/#{entry.id}/edit"
+            i.entypo.pencil
+          = link_to "/oauths/#{oauth.id}/entries/#{entry.id}", data: {:confirm => 'Are you sure?'}, :method => :delete
+            i.entypo.trash
+          - if entry.publish && oauth.publish
+            = link_to "/oauths/#{oauth.id}/entries/#{entry.id}/share"
+              i.entypo.export

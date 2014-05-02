@@ -1,0 +1,23 @@
+# Add application configuration variables here, as shown below.
+#
+
+LOGIN_ID: xxxx
+LOGIN_PASSWORD: xxxxxxxx
+
+FACEBOOK_KEY: xxxxxx
+FACEBOOK_KEY_SECRET: xxxxxx
+
+AWS_ACCESS_KEY_ID: 'xxxxxx'
+AWS_SECRET_ACCESS_KEY: 'xxxxxx'
+
+development:
+  S3_BUCKET_NAME: 'xxxxxx'
+  S3_HOST_NAME: 'xxxxxx'
+  TWITTER_KEY: xxxxxx
+  TWITTER_KEY_SECRET: xxxxxx
+
+production:
+  S3_BUCKET_NAME: 'xxxxxx'
+  S3_HOST_NAME: 'xxxxxx'
+  TWITTER_KEY: xxxxxx
+  TWITTER_KEY_SECRET: xxxxxx

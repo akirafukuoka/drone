@@ -1,0 +1,10 @@
+= render "header", :back_url=>"/oauths", :back_label=>"Accounts"
+
+= render "header_title", :title=>"Schedule"
+
+= render "entry_menu", :current=>"Schedule"
+
+
+= render "entries", :type=>"schedule", :schedule_hour=>@schedule_hour, :schedule_min=>@schedule_min, :schedule_wday=>@schedule_wday
+
+= render "footer"

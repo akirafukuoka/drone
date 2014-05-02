@@ -1,0 +1,32 @@
+.entries
+
+  /- @entries.each do |entry|
+  - i=0
+  - while i<@entries.size
+    - entry = @entries[i]
+    - hour = 0
+    - min = 0
+    - wday = 0
+    - if type == "schedule"
+      - hour = @entry_times[i][0]
+      - min = @entry_times[i][1]
+      - wday = @entry_times[i][2]
+    - p entry
+
+    = render "entry", :entry=>entry, :oauth=>@oauth, :type=>type, :schedule_hour=>hour, :schedule_min=>min, :schedule_wday=>wday
+    - i += 1
+
+  - if type == "schedule"
+    .end.container_narrow
+      i.entypo.warning
+      h3 これ以上の推測はできません
+      p 投稿数の不足や、ランダムソートの終端に近づいている場合これ以上の推測ができないことがあります。
+
+- if @entries.size > 0
+  - if type != "schedule"
+    = paginate @entries
+    .next_loader
+- else
+  .no_result.container_narrow
+    | No Result.
+

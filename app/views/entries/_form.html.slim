@@ -1,0 +1,50 @@
+.container_narrow
+  .box
+    = form_for @entry, :url=>form_path do |f|
+      - if @entry.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@entry.errors.count, "error")} prohibited this entry from being saved:"
+          ul
+            - @entry.errors.full_messages.each do |message|
+              li = message
+
+      .control-group
+        label.control-label 本文
+        .controls
+          = f.text_area :description
+      .control-group
+        label.control-label URL
+        .controls
+          = f.text_field :url, :placeholder=>"http://"
+      .control-group
+        label.control-label ハッシュタグ
+        .controls
+          input type="text" name="tag_list" value="#{@entry.tag_list}" placeholder="（#をつけない、カンマで区切る。例：test1, test2, test3）"
+      .control-group
+        label.control-label 画像
+        .controls
+          = f.file_field :image
+          input type="text" name="image_url" value="#{params[:image_url]}" placeholder="オプション：画像URLを指定"
+          - if params[:image_url].present?
+            p = image_tag params[:image_url], :width=>"330"
+          - if @entry.image.present?
+            p = image_tag @entry.image.url, :width=>"330"
+            p
+              | 画像を削除
+              input name="image_delete" type="checkbox" value="1"
+      .control-group
+        label.control-label 投稿時間指定
+        .controls
+          = f.select :post_hour, [["", nil], [0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10], [11, 11], [12, 12], [13, 13], [14, 14], [15, 15], [16, 16], [17, 17], [18, 18], [19, 19], [20, 20], [21, 21], [22, 22], [23, 23]]
+          = " : "
+          = f.select :post_min, [["", nil], ["00", 0], [10, 10], [20, 20], [30, 30], [40, 40], [50, 50]]
+      .control-group
+        label.control-label 投稿許可
+        .controls
+          = f.check_box :publish
+      .control-group
+        label.control-label
+        .controls
+          input.btn name="commit" type="submit" value="Save"
+
+

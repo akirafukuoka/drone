@@ -1,0 +1,31 @@
+// Place all the styles related to the oauths controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+.checkerBox {
+  margin-bottom: 10px;
+  ::selection {
+      background: rgba(0,0,0,0);
+      cursor: pointer;
+  }
+  ::-moz-selection {
+      background: rgba(0,0,0,0);
+      cursor: pointer;
+  }
+  th {
+    text-align: center;
+    border: 1px solid #000000;
+    padding:5px;
+  }
+  td {
+    border: 1px solid #000000;
+    padding:5px;
+    cursor: pointer;
+    &.checked {
+      background: $yellow;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+p
+  = image_tag @oauth.image, :size=>"24x24"
+  = @oauth.name
+  - if @oauth.publish
+    = "（公開）"
+  - else
+    = "（非公開）"
+
+= link_to 'Edit', edit_oauth_path(@oauth)
+'|
+= link_to 'Entries', "/oauths/#{@oauth.id}/entries"
+'|
+= link_to 'Back', oauths_path

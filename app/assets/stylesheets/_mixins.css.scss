@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+@mixin selif {
+  font-family: "Times New Roman", "YuMincho", YuMincho, "游明朝体", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", serif;
+}
+@mixin sans-selif {
+  font-family: "AvenirNext-Midium", AvenirNext-Midium, "YuGothic", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+}
+@mixin sans-selif-bold {
+  font-family: "AvenirNext-Bold", AvenirNext-Bold, "YuGothic", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+  font-weight:700;
+}
+
+@mixin font-smoothing($value) {
+  -webkit-font-smoothing: $value;
+  -webkit-font-smoothing: $value;
+  -moz-font-smoothing: $value;
+  -ms-font-smoothing: $value;
+  -o-font-smoothing: $value;
+  font-smoothing: $value;
+}
+
+
+@mixin btn {
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  @include box-shadow(rgba(0, 0, 0, 0.2) 0px -2px 0px inset);
+  box-sizing: border-box;
+  &.hover {
+    @include box-shadow(rgba(0, 0, 0, 0.2) 0px -2px 0px inset, rgba(255, 255, 255, 0.1) 0px 200px 0px inset);
+  }
+  &:hover {
+    @include box-shadow(rgba(0, 0, 0, 0.2) 0px -2px 0px inset, rgba(255, 255, 255, 0.1) 0px 200px 0px inset);
+  }
+  &.active {
+    @include box-shadow(rgba(0, 0, 0, 0.2) 0px 4px 0px inset, rgba(0, 0, 0, 0.1) 0px 200px 0px inset);
+  }
+  &:active {
+    @include box-shadow(rgba(0, 0, 0, 0.2) 0px 4px 0px inset, rgba(0, 0, 0, 0.1) 0px 200px 0px inset);
+  }
+  &.border {
+    border-top: 1px solid #FFFFFF;
+  }
+}
+
+// Media Queries
+@mixin mediaquery-pc {
+  @media only screen and (min-width: $width-tablet + $width-scrollbar) {
+    @content;
+  }
+}
+
+@mixin mediaquery-tablet {
+  @media only screen and (min-width: $width-smartphone + $width-scrollbar) and (max-width: $width-tablet + $width-scrollbar - 1) {
+    @content;
+  }
+}
+
+@mixin mediaquery-smartphone {
+  @media only screen and (max-width: $width-smartphone + $width-scrollbar - 1) {
+    @content;
+  }
+}

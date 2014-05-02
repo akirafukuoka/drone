@@ -1,0 +1,10 @@
+= render "header", :back_url=>"/oauths", :back_label=>"Accounts"
+
+= render "header_title", :title=>"Tags: #{params[:tag]}"
+
+= render "entry_menu", :current=>"Tags"
+
+
+= render "entries", :type=>"normal", :schedule_hour=>0, :schedule_min=>0, :schedule_wday=>0
+
+= render "footer"

@@ -1,0 +1,12 @@
+= render "header", :back_url=>"/oauths", :back_label=>"Accounts"
+
+= render "header_title", :title=>"Tweets"
+
+= render "entry_menu", :current=>"Tweets"
+
+.new_entry
+  = link_to 'Add Tweet', "/oauths/#{@oauth.id}/entries/new", :class=>"btn"
+
+= render "entries", :type=>"normal", :schedule_hour=>0, :schedule_min=>0, :schedule_wday=>0
+
+= render "footer"

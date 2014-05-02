@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  oauth_id: 
+  entry_id: 
+  posted_id: MyString
+
+two:
+  oauth_id: 
+  entry_id: 
+  posted_id: MyString

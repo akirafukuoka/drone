@@ -1,0 +1,32 @@
+h1 Listing oauths
+
+table
+  tr
+    th
+    th Name
+    th Publish
+    th Post
+    th
+    th
+    /th
+
+  - @oauths.each do |oauth|
+    tr
+      td = image_tag oauth.image, :size=>"24x24"
+      td = oauth.name
+      - if oauth.publish ==true
+        td 公開
+      - else
+        td 非公開
+      td
+        - if oauth.latest_post.present?
+          = "#{time_ago_in_words oauth.latest_post.created_at}前"
+        - else
+          = ""
+      td = link_to 'Edit', edit_oauth_path(oauth)
+      td = link_to 'Entries', "/oauths/#{oauth.id}/entries"
+      /td = link_to 'Destroy', oauth, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Oauth', "/auth/twitter"

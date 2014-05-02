@@ -1,0 +1,13 @@
+.DS_Store
+
+/.bundle
+/config/application.yml
+/config/settings.local.yml
+/config/settings/*.local.yml
+/config/environments/*.local.yml
+/log/*.log
+/public/system
+/tmp/cache
+/tmp/pids
+/tmp/sessions
+/tmp/sockets

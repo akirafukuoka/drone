@@ -1,0 +1,24 @@
+.header_menu
+  ul
+    li class="#{ current=='Tweets' ? 'current':''}"
+      a href="/oauths/#{@oauth.id}/entries/" Tweets
+    li class="#{ current=='Schedule' ? 'current':''}"
+      a href="/oauths/#{@oauth.id}/entries/schedule" Schedule
+    li class="#{ current=='Timer' ? 'current':''}"
+      a href="/oauths/#{@oauth.id}/entries/timer" Timer
+    li class="#{ current=='Closed' ? 'current':''}"
+      a href="/oauths/#{@oauth.id}/entries/closed" Closed
+    li class="#{ current=='Tags' ? 'current':''}"
+      a href="/oauths/#{@oauth.id}/entries/tags" Tags
+    li class="#{ current=='Search' ? 'current':''}"
+      form action="/oauths/#{@oauth.id}/entries/search"
+        input type="text" name="keyword" placeholder="Search" value="#{params[:keyword]}"
+    li class="#{ current=='Settings' ? 'current':''}"
+      a href="/oauths/#{@oauth.id}/edit" Settings
+    - if @oauth.bookmarklet.present?
+      li
+        a href="#{@oauth.bookmarklet_to_code}" onclick="return false;"
+          i.entypo.tools
+    li
+      a href="http://twitter.com/#{@oauth.name}" target="_blank"
+        i.entypo-social.twitter

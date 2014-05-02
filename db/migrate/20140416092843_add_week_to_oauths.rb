@@ -1,0 +1,6 @@
+class AddWeekToOauths < ActiveRecord::Migration
+  def change
+    add_column :oauths, :week, :string, :default => "1111111"
+    add_column :oauths, :time, :string, :default => "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  end
+end

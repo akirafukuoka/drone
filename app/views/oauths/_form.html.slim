@@ -1,0 +1,103 @@
+.container_narrow
+  .box
+    = form_for @oauth do |f|
+      - if @oauth.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@oauth.errors.count, "error")} prohibited this oauth from being saved:"
+          ul
+            - @oauth.errors.full_messages.each do |message|
+              li = message
+
+      .control-group
+        label.control-label 自動投稿
+        .controls
+          = f.check_box :publish
+      .control-group
+        label.control-label ランダム投稿
+        .controls
+          = f.check_box :random
+      .control-group
+        label.control-label 自動フォロー
+        .controls
+          = f.check_box :auto_follow
+      .control-group
+        label.control-label 自動Retweet
+        .controls
+          p
+            = f.check_box :auto_retweet
+          ul.coops
+            - Oauth.all.each do |other|
+              - if other.id != @oauth.id
+                li
+                  label
+                    = image_tag other.image, :size=>"16x16"
+                    = other.name
+                    - if other.cooped(@oauth)
+                      input type="checkbox" name="coops[]" value="#{other.id}" checked="checked"
+                    - else
+                      input type="checkbox" name="coops[]" value="#{other.id}"
+      .control-group
+        label.control-label アイコン
+        .controls
+          = f.text_field :image
+      /.control-group
+        /label.control-label 基準時間
+        /.controls
+          /= f.select :base_hour, [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10], [11, 11], [12, 12], [13, 13], [14, 14], [15, 15], [16, 16], [17, 17], [18, 18], [19, 19], [20, 20], [21, 21], [22, 22], [23, 23]]
+          /= " : "
+          /= f.select :base_min, [["00", 0], [10, 10], [20, 20], [30, 30], [40, 40], [50, 50]]
+      /.control-group
+        /label.control-label 更新頻度
+        /.controls
+          /= f.select :frequency, [["1日", "day"], ["12時間", "12_hour"], ["6時間", "6_hour"], ["3時間", "3_hour"], ["2時間", "2_hour"], ["1時間", "hour"], ["30分", "30_min"], ["10分", "ten_min"]]
+      .control-group
+        label.control-label 更新時間
+        .controls
+          table.checkerBox.week
+            tbody
+              tr
+                th colspan="7" 曜日
+              tr
+                - a_week = ["日","月","火","水","木","金","土"]
+                - for i in 0..6
+                  td.checker
+                   = a_week[i]
+                   - n = @oauth.week[i]
+                   - if n != "0"
+                    - n = 1
+                   - else
+                    - n = 0
+                   input type="hidden" name="week[]" value="#{n}" disabled="disabled"
+          input type="hidden" name="week_str" value="#{@oauth.week}"
+
+          - a_time = ["00","10","20","30","40","50"]
+          table.checkerBox.time
+            tbody
+              - for k in 0..23
+                tr
+                  td = "#{k}:"
+                  - for i in 0..5
+                    td.checker
+                     = a_time[i]
+                     - n = @oauth.time[k*6+i]
+                     - if n != "0"
+                      - n = 1
+                     - else
+                      - n = 0
+                     input type="hidden" name="time[]" value="#{n}" disabled="disabled"
+          input type="hidden" name="time_str" value="#{@oauth.time}"
+
+      .control-group
+        label.control-label Bookmarklet
+        .controls
+          = f.text_area :bookmarklet, :placeholder=>"オプション: jQuery使用可"
+      .control-group
+        label.control-label
+        .controls
+          input.btn name="commit" type="submit" value="Save"
+      .control-group
+        label.control-label
+        .controls
+          = link_to "/oauths/#{@oauth.id}", data: {:confirm => 'Are you sure?'}, :method => :delete
+            i.entypo.trash
+            span Delete this account?

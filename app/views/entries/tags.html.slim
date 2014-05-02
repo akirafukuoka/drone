@@ -1,0 +1,17 @@
+= render "header", :back_url=>"/oauths", :back_label=>"Accounts"
+
+= render "header_title", :title=>"Tags"
+
+= render "entry_menu", :current=>"Tags"
+
+- if @tags.size > 0
+  .container_narrow.tags
+    ul
+      - @tags.each do |tag|
+        li
+          = link_to "##{tag}", "/oauths/#{@oauth.id}/entries/tags/#{tag}"
+- else
+  .no_result.container_narrow
+    | No Result.
+
+= render "footer"
